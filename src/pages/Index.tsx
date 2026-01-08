@@ -1,13 +1,24 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import HeroSection from "@/components/sections/HeroSection";
+import WhatIsRtaSection from "@/components/sections/WhatIsRtaSection";
+import QuestionsSection from "@/components/sections/QuestionsSection";
+import SchoolsSection from "@/components/sections/SchoolsSection";
+import DebatesSection from "@/components/sections/DebatesSection";
+import SabhaSection from "@/components/sections/SabhaSection";
+import CuratorSection from "@/components/sections/CuratorSection";
+import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
-    </div>
+    <main className="min-h-screen bg-background">
+      <HeroSection />
+      <WhatIsRtaSection />
+      <QuestionsSection />
+      <SchoolsSection />
+      <DebatesSection />
+      <SabhaSection />
+      <CuratorSection />
+      <Footer />
+    </main>
   );
 };
 
