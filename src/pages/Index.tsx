@@ -6,6 +6,7 @@ import SchoolsSection from "@/components/sections/SchoolsSection";
 import DebatesSection from "@/components/sections/DebatesSection";
 import SabhaSection from "@/components/sections/SabhaSection";
 import ForumSection from "@/components/forum/ForumSection";
+import LeaderboardSection from "@/components/sections/LeaderboardSection";
 import CuratorSection from "@/components/sections/CuratorSection";
 import Footer from "@/components/Footer";
 
@@ -20,6 +21,7 @@ const Index = () => {
       <DebatesSection />
       <SabhaSection />
       <ForumSection />
+      <LeaderboardSection />
       <CuratorSection />
       <Footer />
     </main>
