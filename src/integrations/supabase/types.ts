@@ -14,16 +14,79 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      karma_history: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          reason: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          reason: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          reason?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          display_name: string | null
+          id: string
+          joined_at: string
+          karma: number
+          membership_level: Database["public"]["Enums"]["membership_level"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          display_name?: string | null
+          id?: string
+          joined_at?: string
+          karma?: number
+          membership_level?: Database["public"]["Enums"]["membership_level"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          display_name?: string | null
+          id?: string
+          joined_at?: string
+          karma?: number
+          membership_level?: Database["public"]["Enums"]["membership_level"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      add_karma: {
+        Args: { p_amount: number; p_reason: string; p_user_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
-      [_ in never]: never
+      membership_level:
+        | "seeker"
+        | "questioner"
+        | "reader"
+        | "debater"
+        | "interpreter"
+        | "scholar"
+        | "guardian"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +213,16 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      membership_level: [
+        "seeker",
+        "questioner",
+        "reader",
+        "debater",
+        "interpreter",
+        "scholar",
+        "guardian",
+      ],
+    },
   },
 } as const

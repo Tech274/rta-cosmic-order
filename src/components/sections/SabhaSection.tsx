@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/hooks/useAuth";
+import AuthModal from "@/components/auth/AuthModal";
 
 const halls = [
   { name: "Tattva", description: "Metaphysics and the nature of reality" },
@@ -8,18 +11,25 @@ const halls = [
 ];
 
 const levels = [
-  "Seeker",
-  "Questioner", 
-  "Reader",
-  "Debater",
-  "Interpreter",
-  "Scholar",
-  "Guardian",
+  { name: "Seeker", karma: 0 },
+  { name: "Questioner", karma: 100 },
+  { name: "Reader", karma: 300 },
+  { name: "Debater", karma: 800 },
+  { name: "Interpreter", karma: 2000 },
+  { name: "Scholar", karma: 5000 },
+  { name: "Guardian", karma: 10000 },
 ];
 
 const SabhaSection = () => {
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const { user, profile } = useAuth();
+
+  const currentLevelIndex = levels.findIndex(
+    (l) => l.name.toLowerCase() === profile?.membership_level
+  );
+
   return (
-    <section className="py-24 px-6 border-t border-border">
+    <section id="sabha" className="py-24 px-6 border-t border-border">
       <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -35,6 +45,19 @@ const SabhaSection = () => {
             A moderated assembly for philosophical discourse. Not a forum for opinions — 
             a space for knowledge-rooted dialogue.
           </p>
+          {user && profile && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-6 inline-flex items-center gap-4 px-6 py-3 border border-gold/30"
+            >
+              <span className="font-body text-sm text-muted-foreground">Your Status:</span>
+              <span className="font-display text-gold">{levels[currentLevelIndex]?.name || "Seeker"}</span>
+              <span className="text-muted-foreground">|</span>
+              <span className="font-body text-sm text-muted-foreground">Karma:</span>
+              <span className="font-display text-foreground">{profile.karma}</span>
+            </motion.div>
+          )}
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 mb-16">
@@ -69,15 +92,33 @@ const SabhaSection = () => {
               Seven Levels of Membership
             </h3>
             <div className="space-y-2">
-              {levels.map((level, index) => (
-                <div 
-                  key={level} 
-                  className="flex items-center gap-4 p-3 border border-border"
-                >
-                  <span className="font-display text-gold text-sm w-6">{index + 1}</span>
-                  <span className="font-body text-foreground">{level}</span>
-                </div>
-              ))}
+              {levels.map((level, index) => {
+                const isCurrentLevel = index === currentLevelIndex;
+                const isUnlocked = user && index <= currentLevelIndex;
+
+                return (
+                  <div 
+                    key={level.name} 
+                    className={`flex items-center gap-4 p-3 border transition-colors ${
+                      isCurrentLevel
+                        ? "border-gold bg-gold/5"
+                        : isUnlocked
+                        ? "border-border"
+                        : "border-border opacity-50"
+                    }`}
+                  >
+                    <span className={`font-display text-sm w-6 ${isCurrentLevel ? "text-gold" : "text-gold/50"}`}>
+                      {index + 1}
+                    </span>
+                    <span className={`font-body flex-1 ${isCurrentLevel ? "text-foreground" : "text-foreground/70"}`}>
+                      {level.name}
+                    </span>
+                    <span className="font-body text-xs text-muted-foreground">
+                      {level.karma}+ karma
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           </motion.div>
         </div>
@@ -115,11 +156,19 @@ const SabhaSection = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center"
         >
-          <Button variant="outline" size="lg">
-            Enter the Sabhā
-          </Button>
+          {user ? (
+            <p className="font-body text-muted-foreground">
+              Welcome to the Sabhā, {profile?.display_name || "Seeker"}.
+            </p>
+          ) : (
+            <Button variant="outline" size="lg" onClick={() => setAuthModalOpen(true)}>
+              Enter the Sabhā
+            </Button>
+          )}
         </motion.div>
       </div>
+
+      <AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
     </section>
   );
 };
