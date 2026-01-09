@@ -1,3 +1,4 @@
+import Header from "@/components/Header";
 import HeroSection from "@/components/sections/HeroSection";
 import WhatIsRtaSection from "@/components/sections/WhatIsRtaSection";
 import QuestionsSection from "@/components/sections/QuestionsSection";
@@ -10,6 +11,7 @@ import Footer from "@/components/Footer";
 const Index = () => {
   return (
     <main className="min-h-screen bg-background">
+      <Header />
       <HeroSection />
       <WhatIsRtaSection />
       <QuestionsSection />
