@@ -14,6 +14,80 @@ export type Database = {
   }
   public: {
     Tables: {
+      discussion_replies: {
+        Row: {
+          content: string
+          created_at: string
+          discussion_id: string
+          id: string
+          updated_at: string
+          upvotes: number
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          discussion_id: string
+          id?: string
+          updated_at?: string
+          upvotes?: number
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          discussion_id?: string
+          id?: string
+          updated_at?: string
+          upvotes?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discussion_replies_discussion_id_fkey"
+            columns: ["discussion_id"]
+            isOneToOne: false
+            referencedRelation: "discussions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      discussions: {
+        Row: {
+          content: string
+          created_at: string
+          hall: Database["public"]["Enums"]["hall_type"]
+          id: string
+          title: string
+          updated_at: string
+          upvotes: number
+          user_id: string
+          views: number
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          hall: Database["public"]["Enums"]["hall_type"]
+          id?: string
+          title: string
+          updated_at?: string
+          upvotes?: number
+          user_id: string
+          views?: number
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          hall?: Database["public"]["Enums"]["hall_type"]
+          id?: string
+          title?: string
+          updated_at?: string
+          upvotes?: number
+          user_id?: string
+          views?: number
+        }
+        Relationships: []
+      }
       karma_history: {
         Row: {
           amount: number
@@ -68,6 +142,45 @@ export type Database = {
         }
         Relationships: []
       }
+      upvotes: {
+        Row: {
+          created_at: string
+          discussion_id: string | null
+          id: string
+          reply_id: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          discussion_id?: string | null
+          id?: string
+          reply_id?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          discussion_id?: string | null
+          id?: string
+          reply_id?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "upvotes_discussion_id_fkey"
+            columns: ["discussion_id"]
+            isOneToOne: false
+            referencedRelation: "discussions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "upvotes_reply_id_fkey"
+            columns: ["reply_id"]
+            isOneToOne: false
+            referencedRelation: "discussion_replies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -77,8 +190,21 @@ export type Database = {
         Args: { p_amount: number; p_reason: string; p_user_id: string }
         Returns: undefined
       }
+      increment_discussion_views: {
+        Args: { p_discussion_id: string }
+        Returns: undefined
+      }
+      toggle_upvote: {
+        Args: {
+          p_discussion_id?: string
+          p_reply_id?: string
+          p_user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
+      hall_type: "tattva" | "dharma" | "samvada"
       membership_level:
         | "seeker"
         | "questioner"
@@ -214,6 +340,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      hall_type: ["tattva", "dharma", "samvada"],
       membership_level: [
         "seeker",
         "questioner",
