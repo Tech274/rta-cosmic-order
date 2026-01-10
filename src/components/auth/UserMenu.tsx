@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { History, LogOut } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import {
   DropdownMenu,
@@ -66,10 +68,20 @@ const UserMenu = () => {
           </span>
         </div>
         <DropdownMenuSeparator className="bg-border" />
+        <DropdownMenuItem asChild>
+          <Link
+            to="/karma-history"
+            className="font-body text-sm cursor-pointer text-muted-foreground hover:text-foreground flex items-center gap-2"
+          >
+            <History className="h-4 w-4" />
+            Karma History
+          </Link>
+        </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => signOut()}
-          className="font-body text-sm cursor-pointer text-muted-foreground hover:text-foreground"
+          className="font-body text-sm cursor-pointer text-muted-foreground hover:text-foreground flex items-center gap-2"
         >
+          <LogOut className="h-4 w-4" />
           Leave the Sabhā
         </DropdownMenuItem>
       </DropdownMenuContent>
