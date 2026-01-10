@@ -14,6 +14,57 @@ export type Database = {
   }
   public: {
     Tables: {
+      bookmarked_subhashitas: {
+        Row: {
+          created_at: string
+          id: string
+          subhashita_id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          subhashita_id: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          subhashita_id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      daily_practice_logs: {
+        Row: {
+          created_at: string
+          id: string
+          practice_date: string
+          practices_completed: string[]
+          total_duration_seconds: number
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          practice_date?: string
+          practices_completed?: string[]
+          total_duration_seconds?: number
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          practice_date?: string
+          practices_completed?: string[]
+          total_duration_seconds?: number
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       discussion_replies: {
         Row: {
           content: string
@@ -138,6 +189,42 @@ export type Database = {
           karma?: number
           membership_level?: Database["public"]["Enums"]["membership_level"]
           updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      sadhana_sessions: {
+        Row: {
+          completed_at: string
+          count: number | null
+          created_at: string
+          duration_seconds: number
+          id: string
+          mantra: string | null
+          notes: string | null
+          session_type: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string
+          count?: number | null
+          created_at?: string
+          duration_seconds?: number
+          id?: string
+          mantra?: string | null
+          notes?: string | null
+          session_type: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string
+          count?: number | null
+          created_at?: string
+          duration_seconds?: number
+          id?: string
+          mantra?: string | null
+          notes?: string | null
+          session_type?: string
           user_id?: string
         }
         Relationships: []
