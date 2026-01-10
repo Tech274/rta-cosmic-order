@@ -4,12 +4,13 @@ import { Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useDiscussions, HallType } from "@/hooks/useDiscussions";
 import { useAuth } from "@/hooks/useAuth";
+import { useSearch } from "@/contexts/SearchContext";
 import DiscussionCard from "./DiscussionCard";
 import CreateDiscussionForm from "./CreateDiscussionForm";
 import DiscussionDetail from "./DiscussionDetail";
 import AuthModal from "@/components/auth/AuthModal";
 import SearchButton from "@/components/search/SearchButton";
-import SearchModal from "@/components/search/SearchModal";
+import GlobalSearch from "@/components/search/GlobalSearch";
 
 const halls: { value: HallType | "all"; label: string }[] = [
   { value: "all", label: "All Halls" },
@@ -23,8 +24,8 @@ const ForumSection = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [selectedDiscussion, setSelectedDiscussion] = useState<string | null>(null);
   const [authModalOpen, setAuthModalOpen] = useState(false);
-  const [searchModalOpen, setSearchModalOpen] = useState(false);
   const { user } = useAuth();
+  const { openSearch } = useSearch();
 
   const { discussions, loading, createDiscussion, toggleUpvote } = useDiscussions(
     selectedHall === "all" ? undefined : selectedHall
@@ -109,7 +110,7 @@ const ForumSection = () => {
           </div>
 
           <div className="flex gap-2">
-            <SearchButton onClick={() => setSearchModalOpen(true)} />
+            <SearchButton onClick={openSearch} />
             <Button onClick={handleNewPost}>
               <Plus className="w-4 h-4 mr-2" />
               New Question
@@ -161,11 +162,7 @@ const ForumSection = () => {
       </div>
 
       <AuthModal isOpen={authModalOpen} onClose={() => setAuthModalOpen(false)} />
-      <SearchModal 
-        isOpen={searchModalOpen} 
-        onClose={() => setSearchModalOpen(false)} 
-        onSelectDiscussion={setSelectedDiscussion}
-      />
+      <GlobalSearch onSelectDiscussion={setSelectedDiscussion} />
     </section>
   );
 };
