@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import AuthModal from "@/components/auth/AuthModal";
@@ -31,15 +32,16 @@ const Header = () => {
             className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md border-b border-border"
           >
             <div className="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
-              <div className="flex items-center gap-8">
-                <a href="#" className="font-display text-xl text-gold">
+            <div className="flex items-center gap-8">
+                <Link to="/" className="font-display text-xl text-gold">
                   ṚTA
-                </a>
+                </Link>
                 <nav className="hidden md:flex items-center gap-6">
-                  <a href="#what-is-rta" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Philosophy</a>
-                  <a href="#schools" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Schools</a>
-                  <a href="#debates" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Debates</a>
-                  <a href="#sabha" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Sabhā</a>
+                  <Link to="/scriptures" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Scriptures</Link>
+                  <Link to="/temples" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Sacred Places</Link>
+                  <a href="/#schools" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Schools</a>
+                  <a href="/#debates" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Debates</a>
+                  <a href="/#sabha" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Sabhā</a>
                 </nav>
               </div>
 

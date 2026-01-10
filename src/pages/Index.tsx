@@ -1,6 +1,8 @@
 import Header from "@/components/Header";
 import HeroSection from "@/components/sections/HeroSection";
 import WhatIsRtaSection from "@/components/sections/WhatIsRtaSection";
+import DailyDharmaSection from "@/components/sections/DailyDharmaSection";
+import ScripturesSection from "@/components/sections/ScripturesSection";
 import SacredPlacesSection from "@/components/sections/SacredPlacesSection";
 import QuestionsSection from "@/components/sections/QuestionsSection";
 import SchoolsSection from "@/components/sections/SchoolsSection";
@@ -17,6 +19,8 @@ const Index = () => {
       <Header />
       <HeroSection />
       <WhatIsRtaSection />
+      <DailyDharmaSection />
+      <ScripturesSection />
       <SacredPlacesSection />
       <QuestionsSection />
       <SchoolsSection />
