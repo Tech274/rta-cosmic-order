@@ -38,9 +38,9 @@ const Header = () => {
                 </Link>
                 <nav className="hidden md:flex items-center gap-6">
                   <Link to="/scriptures" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Scriptures</Link>
+                  <Link to="/daily-dharma" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Daily Dharma</Link>
                   <Link to="/temples" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Sacred Places</Link>
-                  <a href="/#schools" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Schools</a>
-                  <a href="/#debates" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Debates</a>
+                  <Link to="/sadhana" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Sadhana</Link>
                   <a href="/#sabha" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Sabhā</a>
                 </nav>
               </div>
