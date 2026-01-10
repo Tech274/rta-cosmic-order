@@ -20,16 +20,18 @@ const TempleCard = ({ temple, index }: TempleCardProps) => {
         to={`/temples/${temple.id}`}
         className="group block bg-card border border-border hover:border-gold/50 transition-all duration-300"
       >
-        {/* Image placeholder with sacred geometry pattern */}
+        {/* Temple Image */}
         <div className="aspect-[4/3] bg-muted relative overflow-hidden">
-          <div className="absolute inset-0 bg-yantra-pattern opacity-10" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="text-center">
-              <p className="font-sanskrit text-2xl text-gold/60 mb-2">{temple.sanskritName}</p>
-              <p className="font-display text-sm text-muted-foreground tracking-[0.2em] uppercase">
-                {temple.deity.split('(')[0].trim()}
-              </p>
-            </div>
+          <img 
+            src={temple.imageUrl} 
+            alt={temple.name}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          {/* Gradient overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+          {/* Sanskrit name overlay */}
+          <div className="absolute bottom-4 left-4 right-4">
+            <p className="font-sanskrit text-xl text-gold drop-shadow-lg">{temple.sanskritName}</p>
           </div>
           {/* Hover overlay */}
           <div className="absolute inset-0 bg-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
