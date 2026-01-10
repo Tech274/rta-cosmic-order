@@ -63,8 +63,8 @@ export const temples: Temple[] = [
       byTrain: "Varanasi Junction Railway Station (2 km)",
       byRoad: "Well connected by NH-2 and state highways"
     },
-    linkedScriptures: ["Skanda Purana", "Kashi Khanda", "Shiva Purana"],
-    imageUrl: "/placeholder.svg",
+  linkedScriptures: ["Skanda Purana", "Kashi Khanda", "Shiva Purana"],
+    imageUrl: "/temples/kashi-vishwanath.jpg",
     significance: "Liberation (Moksha) is believed to be attained by those who die in Kashi",
     timings: "3:00 AM - 11:00 PM (with breaks)",
     dressCode: "Traditional attire preferred; modest clothing required"
@@ -99,7 +99,7 @@ export const temples: Temple[] = [
       byRoad: "NH-65 and NH-71 connect Tirupati to major cities"
     },
     linkedScriptures: ["Bhagavad Gita", "Vishnu Purana", "Garuda Purana"],
-    imageUrl: "/placeholder.svg",
+    imageUrl: "/temples/tirupati-balaji.jpg",
     significance: "Known as the 'Kaliyuga Vaikunta' - heaven on earth during this age",
     timings: "2:30 AM - 1:30 AM (practically 24 hours with short breaks)",
     dressCode: "Traditional Hindu attire mandatory; no pants or shorts"
@@ -133,7 +133,7 @@ export const temples: Temple[] = [
       byRoad: "Well connected by Gujarat State Highway network"
     },
     linkedScriptures: ["Shiva Purana", "Skanda Purana", "Rig Veda"],
-    imageUrl: "/placeholder.svg",
+    imageUrl: "/temples/somnath.jpg",
     significance: "First Jyotirlinga; symbolizes eternal reconstruction of faith",
     timings: "6:00 AM - 9:00 PM",
     dressCode: "Traditional attire preferred"
@@ -168,7 +168,7 @@ export const temples: Temple[] = [
       byRoad: "Well connected by NH-44 and NH-85"
     },
     linkedScriptures: ["Thiruvilaiyadal Puranam", "Shiva Purana", "Tiruvilaiyatar Puranam"],
-    imageUrl: "/placeholder.svg",
+    imageUrl: "/temples/meenakshi-amman.jpg",
     significance: "One of the Pancha Sabhai where Shiva performed his cosmic dance",
     timings: "5:00 AM - 12:30 PM, 4:00 PM - 9:30 PM",
     dressCode: "Traditional attire; men should remove shirts inside main shrine"
@@ -203,7 +203,7 @@ export const temples: Temple[] = [
       byRoad: "Well connected by NH-316 to Bhubaneswar and other cities"
     },
     linkedScriptures: ["Skanda Purana", "Brahma Purana", "Padma Purana"],
-    imageUrl: "/placeholder.svg",
+    imageUrl: "/temples/jagannath-puri.jpg",
     significance: "One of the Char Dham; Mahaprasad served here has no caste distinctions",
     timings: "5:00 AM - 11:00 PM",
     dressCode: "Only Hindus allowed; traditional attire required"
@@ -238,7 +238,7 @@ export const temples: Temple[] = [
       byRoad: "Gaurikund is the last motorable point; 16 km trek to temple"
     },
     linkedScriptures: ["Shiva Purana", "Skanda Purana", "Mahabharata"],
-    imageUrl: "/placeholder.svg",
+    imageUrl: "/temples/kedarnath.jpg",
     significance: "Part of Char Dham; one of the Panch Kedar temples",
     timings: "4:00 AM - 9:00 PM (Open April to November only)",
     dressCode: "Warm traditional clothing; modest dress required"

@@ -9,6 +9,9 @@ import Index from "./pages/Index";
 import KarmaHistory from "./pages/KarmaHistory";
 import Temples from "./pages/Temples";
 import TempleDetail from "./pages/TempleDetail";
+import Scriptures from "./pages/Scriptures";
+import ScriptureDetail from "./pages/ScriptureDetail";
+import ChapterDetail from "./pages/ChapterDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +29,9 @@ const App = () => (
               <Route path="/karma-history" element={<KarmaHistory />} />
               <Route path="/temples" element={<Temples />} />
               <Route path="/temples/:id" element={<TempleDetail />} />
+              <Route path="/scriptures" element={<Scriptures />} />
+              <Route path="/scriptures/:id" element={<ScriptureDetail />} />
+              <Route path="/scriptures/:scriptureId/chapters/:chapterId" element={<ChapterDetail />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
