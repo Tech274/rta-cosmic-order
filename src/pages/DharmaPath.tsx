@@ -8,6 +8,7 @@ import { PracticeAchievements } from "@/components/dharmapath/PracticeAchievemen
 import { StreakTracker } from "@/components/dharmapath/StreakTracker";
 import SankalpaTracker from "@/components/sadhana/SankalpaTracker";
 import UpcomingEvents from "@/components/panchang/UpcomingEvents";
+import SpiritualReportCard from "@/components/report/SpiritualReportCard";
 import { useDharmaPath } from "@/hooks/useDharmaPath";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -109,6 +110,9 @@ const DharmaPath = () => {
 
           {/* Upcoming Events */}
           <UpcomingEvents />
+
+          {/* Spiritual Report Card */}
+          <SpiritualReportCard />
 
           {/* Reading Progress - Full Width */}
           <div className="lg:col-span-2 xl:col-span-3">
