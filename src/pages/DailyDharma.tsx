@@ -4,6 +4,7 @@ import { Search, Bookmark, Filter } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubhashitaCard from "@/components/dailydharma/SubhashitaCard";
+import EmailSubscribeForm from "@/components/dailydharma/EmailSubscribeForm";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -76,6 +77,16 @@ const DailyDharma = () => {
               A treasury of Sanskrit wisdom — ancient epigrams translated into 
               poetry with interpretive meaning for modern seekers.
             </p>
+          </motion.div>
+
+          {/* Email Subscribe Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className="max-w-md mx-auto"
+          >
+            <EmailSubscribeForm />
           </motion.div>
         </div>
       </section>
