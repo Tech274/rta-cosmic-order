@@ -487,6 +487,239 @@ export const subhashitas: Subhashita[] = [
     meaning: "Beyond all divisions of nation, race, and creed, we are one human family sharing one home. This vision is the foundation of universal harmony.",
     category: "inclusion",
     source: "Maha Upanishad"
+  },
+
+  // Additional Chanakya Niti
+  {
+    id: "46",
+    sanskrit: "परस्परस्य मर्माणि ये भाषन्ते नराधमाः",
+    transliteration: "Parasparasya marmāṇi ye bhāṣante narādhamāḥ",
+    translation: "Those who reveal others' secrets are the lowest of men",
+    meaning: "Betraying confidences destroys trust and marks a person as untrustworthy. Guard the secrets entrusted to you as sacred.",
+    category: "honesty",
+    source: "Chanakya Niti"
+  },
+  {
+    id: "47",
+    sanskrit: "लोकयात्रा भयं लज्जा दाक्षिण्यं त्यागशीलता",
+    transliteration: "Lokayātrā bhayaṁ lajjā dākṣiṇyaṁ tyāgaśīlatā",
+    translation: "Worldly conduct, fear of wrongdoing, modesty, courtesy, and generosity",
+    meaning: "These five qualities define a cultured person. Together they form the foundation of civilized society.",
+    category: "character",
+    source: "Chanakya Niti"
+  },
+  {
+    id: "48",
+    sanskrit: "न विश्वसेत् कुमित्रे च मित्रे चापि न विश्वसेत्",
+    transliteration: "Na viśvaset kumitre ca mitre cāpi na viśvaset",
+    translation: "Trust not a bad friend, and trust not even a good friend too much",
+    meaning: "Prudent caution protects the wise. Even trusted friends may falter; maintain appropriate boundaries.",
+    category: "wisdom",
+    source: "Chanakya Niti"
+  },
+  {
+    id: "49",
+    sanskrit: "विपदि धैर्यमथाभ्युदये क्षमा",
+    transliteration: "Vipadi dhairyamathābhyudaye kṣamā",
+    translation: "Courage in adversity, forgiveness in prosperity",
+    meaning: "The wise remain steadfast when times are hard and humble when fortune smiles. This balance reflects true maturity.",
+    category: "courage",
+    source: "Chanakya Niti"
+  },
+  {
+    id: "50",
+    sanskrit: "सेवितव्यो महावृक्षः फलच्छायासमन्वितः",
+    transliteration: "Sevitavyo mahāvṛkṣaḥ phalacchāyāsamanvitaḥ",
+    translation: "Seek shelter under a great tree that provides both fruit and shade",
+    meaning: "Choose mentors and associations wisely. The truly great offer both tangible benefits and protective guidance.",
+    category: "leadership",
+    source: "Chanakya Niti"
+  },
+
+  // Additional Panchatantra
+  {
+    id: "51",
+    sanskrit: "अर्थार्थी जीवलोकोऽयं श्मशानमपि सेवते",
+    transliteration: "Arthārthī jīvaloko'yaṁ śmaśānamapi sevate",
+    translation: "For wealth, even the cremation ground is visited",
+    meaning: "The pursuit of wealth drives humans to extreme lengths. Observe how attachment to money shapes behavior.",
+    category: "money",
+    source: "Panchatantra"
+  },
+  {
+    id: "52",
+    sanskrit: "अनागतं यः कुरुते स शोभते",
+    transliteration: "Anāgataṁ yaḥ kurute sa śobhate",
+    translation: "One who prepares for the future prospers",
+    meaning: "Foresight and planning distinguish the wise. Prepare today for tomorrow's challenges.",
+    category: "action",
+    source: "Panchatantra"
+  },
+  {
+    id: "53",
+    sanskrit: "अश्वं नैव गजं नैव व्याघ्रं नैव च नैव च",
+    transliteration: "Aśvaṁ naiva gajaṁ naiva vyāghraṁ naiva ca naiva ca",
+    translation: "Not a horse, not an elephant, not even a tiger",
+    meaning: "A book is the best companion — it never tires, never disappoints, and travels easily. Unlike animals, books require no maintenance.",
+    category: "knowledge",
+    source: "Panchatantra"
+  },
+  {
+    id: "54",
+    sanskrit: "संघे शक्तिः कलौ युगे",
+    transliteration: "Saṁghe śaktiḥ kalau yuge",
+    translation: "In unity there is strength, especially in this age",
+    meaning: "Collective action accomplishes what individuals cannot. In difficult times, solidarity becomes even more essential.",
+    category: "leadership",
+    source: "Panchatantra"
+  },
+  {
+    id: "55",
+    sanskrit: "दुर्बलस्य बलं राजा बालानां रोदनं बलम्",
+    transliteration: "Durbalasya balaṁ rājā bālānāṁ rodanaṁ balam",
+    translation: "The king is the strength of the weak; crying is the strength of children",
+    meaning: "Each being has appropriate means of protection. Recognize and use the resources available to your situation.",
+    category: "power",
+    source: "Panchatantra"
+  },
+
+  // Additional Hitopadesha
+  {
+    id: "56",
+    sanskrit: "उपकारिषु यः साधुः साधुत्वे तत्र का कथा",
+    transliteration: "Upakāriṣu yaḥ sādhuḥ sādhutve tatra kā kathā",
+    translation: "Being good to benefactors is no great virtue",
+    meaning: "True nobility shows in kindness to those who cannot repay. Anyone can reciprocate; the saint gives without expectation.",
+    category: "charity",
+    source: "Hitopadesha"
+  },
+  {
+    id: "57",
+    sanskrit: "येषां न विद्या न तपो न दानं ज्ञानं न शीलं न गुणो न धर्मः",
+    transliteration: "Yeṣāṁ na vidyā na tapo na dānaṁ jñānaṁ na śīlaṁ na guṇo na dharmaḥ",
+    translation: "Those without learning, austerity, charity, wisdom, character, virtue, or dharma",
+    meaning: "Such persons burden the earth like beasts in human form. Cultivate at least one noble quality.",
+    category: "character",
+    source: "Hitopadesha"
+  },
+  {
+    id: "58",
+    sanskrit: "यथा ह्येकेन चक्रेण न रथस्य गतिर्भवेत्",
+    transliteration: "Yathā hyekena cakreṇa na rathasya gatirbhavet",
+    translation: "As a chariot cannot move with one wheel",
+    meaning: "Success requires multiple supporting elements working together. Balance theory with practice, knowledge with action.",
+    category: "wisdom",
+    source: "Hitopadesha"
+  },
+  {
+    id: "59",
+    sanskrit: "न हि कश्चित् विजानाति किं कस्य श्वो भविष्यति",
+    transliteration: "Na hi kaścit vijānāti kiṁ kasya śvo bhaviṣyati",
+    translation: "No one knows what tomorrow holds for anyone",
+    meaning: "Life's uncertainty counsels both humility and urgency. Do good today; tomorrow is promised to none.",
+    category: "life",
+    source: "Hitopadesha"
+  },
+  {
+    id: "60",
+    sanskrit: "सुखार्थिनः कुतो विद्या विद्यार्थिनः कुतो सुखम्",
+    transliteration: "Sukhārthinaḥ kuto vidyā vidyārthinaḥ kuto sukham",
+    translation: "Where is knowledge for the comfort-seeker? Where is comfort for the knowledge-seeker?",
+    meaning: "Learning demands sacrifice. Those unwilling to endure hardship cannot attain wisdom; those pursuing wisdom must accept discomfort.",
+    category: "perseverance",
+    source: "Hitopadesha"
+  },
+
+  // Additional wisdom from various sources
+  {
+    id: "61",
+    sanskrit: "यस्मिन् देशे न सम्मानो न वृत्तिर्न च बान्धवाः",
+    transliteration: "Yasmin deśe na sammāno na vṛttirna ca bāndhavāḥ",
+    translation: "Where there is no respect, no livelihood, and no relatives",
+    meaning: "Such a place should be abandoned. A wise person seeks environments that support growth and wellbeing.",
+    category: "freedom",
+    source: "Chanakya Niti"
+  },
+  {
+    id: "62",
+    sanskrit: "स्वयं कर्म करोत्यात्मा स्वयं तत्फलमश्नुते",
+    transliteration: "Svayaṁ karma karotyātmā svayaṁ tatphalamaśnute",
+    translation: "The self performs actions and the self enjoys their fruits",
+    meaning: "We are the architects of our destiny. No one else creates our karma; no one else can liberate us from it.",
+    category: "self-reliance",
+    source: "Mahabharata"
+  },
+  {
+    id: "63",
+    sanskrit: "तृणं ब्रह्मविदः स्वर्गस्तृणं शूरस्य जीवितम्",
+    transliteration: "Tṛṇaṁ brahmavidaḥ svargastṛṇaṁ śūrasya jīvitam",
+    translation: "Heaven is straw to the knower of Brahman; life is straw to the hero",
+    meaning: "Those who have attained the highest wisdom care nothing for lesser rewards. The truly brave are indifferent to death.",
+    category: "courage",
+    source: "Subhashita"
+  },
+  {
+    id: "64",
+    sanskrit: "अयं निजः परो वेति गणना लघुचेतसाम्",
+    transliteration: "Ayaṁ nijaḥ paro veti gaṇanā laghucetasām",
+    translation: "'This one is mine, that one is a stranger' — such thinking belongs to the small-minded",
+    meaning: "Narrow identity creates division. The expansive heart sees all beings as family.",
+    category: "inclusion",
+    source: "Maha Upanishad"
+  },
+  {
+    id: "65",
+    sanskrit: "शरीरमाद्यं खलु धर्मसाधनम्",
+    transliteration: "Śarīramādyaṁ khalu dharmasādhanam",
+    translation: "The body is indeed the primary instrument for practicing dharma",
+    meaning: "Physical health enables spiritual practice. Care for the body as the temple that houses the soul.",
+    category: "life",
+    source: "Kumarasambhava"
+  },
+  {
+    id: "66",
+    sanskrit: "अकृत्वा परसन्तापमगत्वा खलनम्रताम्",
+    transliteration: "Akṛtvā parasantāpamagatvā khalanammratām",
+    translation: "Without causing others pain, without bowing to the wicked",
+    meaning: "One can succeed ethically. Neither harming others nor compromising with evil is necessary for prosperity.",
+    category: "honesty",
+    source: "Subhashita"
+  },
+  {
+    id: "67",
+    sanskrit: "अर्थस्य पुरुषो दासो दासस्त्वर्थो न कस्यचित्",
+    transliteration: "Arthasya puruṣo dāso dāsastvartho na kasyacit",
+    translation: "Man is the slave of money; money is nobody's slave",
+    meaning: "Wealth controls its possessor, not the reverse. Recognize this dynamic to avoid becoming money's servant.",
+    category: "money",
+    source: "Chanakya Niti"
+  },
+  {
+    id: "68",
+    sanskrit: "परित्यज्य गुणान् सर्वान् दोषान् य इच्छति",
+    transliteration: "Parityajya guṇān sarvān doṣān ya icchati",
+    translation: "One who ignores virtues and seeks only faults",
+    meaning: "Such a person poisons their own mind. The fault-finder destroys their own peace before harming others.",
+    category: "reason",
+    source: "Subhashita"
+  },
+  {
+    id: "69",
+    sanskrit: "नास्ति विद्यासमो बन्धुर्नास्ति विद्यासमः सुहृत्",
+    transliteration: "Nāsti vidyāsamo bandhurnāsti vidyāsamaḥ suhṛt",
+    translation: "There is no relative like knowledge, no friend like learning",
+    meaning: "Education is the most reliable companion through life's journey. Unlike people, knowledge never abandons us.",
+    category: "knowledge",
+    source: "Chanakya Niti"
+  },
+  {
+    id: "70",
+    sanskrit: "कालः पचति भूतानि कालः संहरते प्रजाः",
+    transliteration: "Kālaḥ pacati bhūtāni kālaḥ saṁharate prajāḥ",
+    translation: "Time cooks all beings, time takes away all creatures",
+    meaning: "Nothing escapes time's relentless march. Understanding impermanence liberates us from futile attachment.",
+    category: "life",
+    source: "Mahabharata"
   }
 ];
 
