@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import { SpiritualProfile } from "@/components/dharmapath/SpiritualProfile";
 import { ReadingProgress } from "@/components/dharmapath/ReadingProgress";
 import { PracticeAchievements } from "@/components/dharmapath/PracticeAchievements";
+import { StreakTracker } from "@/components/dharmapath/StreakTracker";
 import { useDharmaPath } from "@/hooks/useDharmaPath";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -78,7 +79,13 @@ const DharmaPath = () => {
         </motion.div>
 
         {/* Dashboard Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 max-w-7xl mx-auto">
+          {/* Streak Tracker */}
+          <StreakTracker
+            currentStreak={dharmaPath?.currentStreak || 0}
+            longestStreak={dharmaPath?.longestStreak || 0}
+          />
+
           {/* Spiritual Profile */}
           <SpiritualProfile
             ishtaDevata={dharmaPath?.ishta_devata || null}
@@ -96,7 +103,7 @@ const DharmaPath = () => {
           />
 
           {/* Reading Progress - Full Width */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 xl:col-span-3">
             <ReadingProgress progress={dharmaPath?.readingProgress || []} />
           </div>
         </div>
