@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Bell, BellOff, Moon, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Calendar } from '@/components/ui/calendar';
+import NotificationSettings from './NotificationSettings';
 import { 
   usePanchangEvents, 
   useUserReminders, 
@@ -13,6 +14,7 @@ import {
   PanchangEvent,
   EVENT_TYPE_CONFIG 
 } from '@/hooks/usePanchang';
+import { useNotifications } from '@/hooks/useNotifications';
 import { format, addMonths, subMonths, isSameDay, parseISO, subDays } from 'date-fns';
 
 const PanchangCalendar = () => {
@@ -23,6 +25,34 @@ const PanchangCalendar = () => {
   const { data: reminders } = useUserReminders();
   const createReminder = useCreateReminder();
   const deleteReminder = useDeleteReminder();
+  const { isEnabled: notificationsEnabled, sendNotification } = useNotifications();
+
+  // Check for upcoming events and send notifications
+  useEffect(() => {
+    if (!notificationsEnabled || !events) return;
+
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+
+    const upcomingEvents = events.filter(event => {
+      const eventDate = parseISO(event.event_date);
+      return isSameDay(eventDate, tomorrow);
+    });
+
+    // Send notification for tomorrow's events (once per session)
+    upcomingEvents.forEach(event => {
+      const notifiedKey = `notified_${event.id}`;
+      if (!sessionStorage.getItem(notifiedKey)) {
+        sendNotification(`🕉️ Tomorrow: ${event.event_name}`, {
+          body: event.description || `${event.event_type} - Don't forget to prepare!`,
+          tag: event.id,
+        });
+        sessionStorage.setItem(notifiedKey, 'true');
+      }
+    });
+  }, [events, notificationsEnabled, sendNotification]);
 
   const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
   const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
@@ -113,6 +143,9 @@ const PanchangCalendar = () => {
             className="rounded-md border border-border/50"
           />
         </div>
+
+        {/* Notification Settings */}
+        <NotificationSettings />
 
         {/* Legend */}
         <div className="flex justify-center gap-4 text-xs">
