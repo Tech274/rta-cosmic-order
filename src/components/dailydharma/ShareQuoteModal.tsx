@@ -16,8 +16,11 @@ import {
   Download,
   Check,
   MessageCircle,
+  Loader2,
+  Instagram,
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import {
   type Subhashita,
   categoryLabels,
@@ -33,6 +36,8 @@ interface ShareQuoteModalProps {
 const ShareQuoteModal = ({ isOpen, onClose, subhashita }: ShareQuoteModalProps) => {
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
+  const [generating, setGenerating] = useState(false);
+  const [generatedImage, setGeneratedImage] = useState<string | null>(null);
 
   const shareText = `"${subhashita.translation}"\n\n${subhashita.sanskrit}\n\n— ${subhashita.source || "Ancient Sanskrit Wisdom"}`;
   const shareUrl = typeof window !== "undefined" ? window.location.href : "";
@@ -81,71 +86,171 @@ const ShareQuoteModal = ({ isOpen, onClose, subhashita }: ShareQuoteModalProps) 
     window.open(url, "_blank", "noopener,noreferrer,width=600,height=400");
   };
 
+  const handleGenerateImage = async () => {
+    setGenerating(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("generate-quote-image", {
+        body: {
+          sanskrit: subhashita.sanskrit,
+          translation: subhashita.translation,
+          source: subhashita.source,
+          category: categoryLabels[subhashita.category],
+        },
+      });
+
+      if (error) throw error;
+
+      if (data?.success && data?.imageUrl) {
+        setGeneratedImage(data.imageUrl);
+        toast({
+          title: "Image generated!",
+          description: "Your quote image is ready to download.",
+        });
+      } else {
+        throw new Error(data?.error || "Failed to generate image");
+      }
+    } catch (error) {
+      console.error("Error generating image:", error);
+      toast({
+        title: "Generation failed",
+        description: "Could not generate image. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setGenerating(false);
+    }
+  };
+
+  const handleDownloadImage = () => {
+    if (!generatedImage) return;
+
+    const link = document.createElement("a");
+    link.href = generatedImage;
+    link.download = `rta-dharma-${subhashita.id}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    toast({
+      title: "Downloaded!",
+      description: "Share your wisdom on Instagram!",
+    });
+  };
+
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-lg bg-background border-border">
+      <DialogContent className="sm:max-w-lg bg-background border-border max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-xl font-serif text-primary">
             Share This Wisdom
           </DialogTitle>
         </DialogHeader>
 
-        {/* Quote Card Preview */}
-        <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-amber-950/80 via-stone-900 to-stone-950 p-6 border border-primary/20">
-          {/* Decorative elements */}
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
-          
-          {/* Decorative corner ornaments */}
-          <div className="absolute top-2 left-2 w-8 h-8 border-l-2 border-t-2 border-primary/30 rounded-tl" />
-          <div className="absolute top-2 right-2 w-8 h-8 border-r-2 border-t-2 border-primary/30 rounded-tr" />
-          <div className="absolute bottom-2 left-2 w-8 h-8 border-l-2 border-b-2 border-primary/30 rounded-bl" />
-          <div className="absolute bottom-2 right-2 w-8 h-8 border-r-2 border-b-2 border-primary/30 rounded-br" />
-
-          <div className="relative z-10 text-center space-y-4">
-            {/* Category */}
-            <Badge
-              variant="outline"
-              className={`${categoryColors[subhashita.category]} text-xs`}
+        {/* Generated Image Preview or Quote Card Preview */}
+        {generatedImage ? (
+          <div className="relative rounded-lg overflow-hidden">
+            <img
+              src={generatedImage}
+              alt="Generated quote"
+              className="w-full h-auto rounded-lg"
+            />
+            <Button
+              onClick={handleDownloadImage}
+              className="absolute bottom-4 right-4 gap-2"
+              size="sm"
             >
-              {categoryLabels[subhashita.category]}
-            </Badge>
+              <Download className="w-4 h-4" />
+              Download
+            </Button>
+          </div>
+        ) : (
+          <div className="relative overflow-hidden rounded-lg bg-gradient-to-br from-amber-950/80 via-stone-900 to-stone-950 p-6 border border-primary/20">
+            {/* Decorative elements */}
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+            
+            {/* Decorative corner ornaments */}
+            <div className="absolute top-2 left-2 w-8 h-8 border-l-2 border-t-2 border-primary/30 rounded-tl" />
+            <div className="absolute top-2 right-2 w-8 h-8 border-r-2 border-t-2 border-primary/30 rounded-tr" />
+            <div className="absolute bottom-2 left-2 w-8 h-8 border-l-2 border-b-2 border-primary/30 rounded-bl" />
+            <div className="absolute bottom-2 right-2 w-8 h-8 border-r-2 border-b-2 border-primary/30 rounded-br" />
 
-            {/* Sanskrit */}
-            <p className="font-sanskrit text-xl text-primary leading-relaxed">
-              {subhashita.sanskrit}
-            </p>
+            <div className="relative z-10 text-center space-y-4">
+              {/* Category */}
+              <Badge
+                variant="outline"
+                className={`${categoryColors[subhashita.category]} text-xs`}
+              >
+                {categoryLabels[subhashita.category]}
+              </Badge>
 
-            {/* Divider */}
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-12 h-px bg-gradient-to-r from-transparent to-primary/40" />
-              <span className="text-primary/40 text-lg">✦</span>
-              <div className="w-12 h-px bg-gradient-to-l from-transparent to-primary/40" />
-            </div>
-
-            {/* Translation */}
-            <p className="font-serif text-lg text-foreground italic">
-              "{subhashita.translation}"
-            </p>
-
-            {/* Source */}
-            <p className="text-sm text-primary/60">
-              — {subhashita.source || "Ancient Sanskrit Wisdom"}
-            </p>
-
-            {/* Branding */}
-            <div className="pt-2">
-              <p className="text-xs text-muted-foreground/50 tracking-widest uppercase">
-                ṚTA · Daily Dharma
+              {/* Sanskrit */}
+              <p className="font-sanskrit text-xl text-primary leading-relaxed">
+                {subhashita.sanskrit}
               </p>
+
+              {/* Divider */}
+              <div className="flex items-center justify-center gap-3">
+                <div className="w-12 h-px bg-gradient-to-r from-transparent to-primary/40" />
+                <span className="text-primary/40 text-lg">✦</span>
+                <div className="w-12 h-px bg-gradient-to-l from-transparent to-primary/40" />
+              </div>
+
+              {/* Translation */}
+              <p className="font-serif text-lg text-foreground italic">
+                "{subhashita.translation}"
+              </p>
+
+              {/* Source */}
+              <p className="text-sm text-primary/60">
+                — {subhashita.source || "Ancient Sanskrit Wisdom"}
+              </p>
+
+              {/* Branding */}
+              <div className="pt-2">
+                <p className="text-xs text-muted-foreground/50 tracking-widest uppercase">
+                  ṚTA · Daily Dharma
+                </p>
+              </div>
             </div>
           </div>
+        )}
+
+        {/* Instagram Image Generation */}
+        <div className="space-y-3">
+          <Button
+            onClick={generatedImage ? handleDownloadImage : handleGenerateImage}
+            disabled={generating}
+            className="w-full gap-2 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
+          >
+            {generating ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Generating beautiful image...
+              </>
+            ) : generatedImage ? (
+              <>
+                <Download className="w-4 h-4" />
+                Download for Instagram
+              </>
+            ) : (
+              <>
+                <Instagram className="w-4 h-4" />
+                Generate Image for Instagram
+              </>
+            )}
+          </Button>
+          {!generatedImage && (
+            <p className="text-xs text-muted-foreground text-center">
+              AI will create a beautiful 1080×1080 image perfect for Instagram
+            </p>
+          )}
         </div>
 
         {/* Share Options */}
-        <div className="space-y-4 pt-2">
-          <p className="text-sm text-muted-foreground text-center">
-            Share on your favorite platform
+        <div className="space-y-4 pt-2 border-t border-border">
+          <p className="text-sm text-muted-foreground text-center pt-2">
+            Or share directly on social media
           </p>
 
           <div className="grid grid-cols-4 gap-3">
