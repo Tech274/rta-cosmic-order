@@ -41,6 +41,7 @@ const Header = () => {
                   <Link to="/daily-dharma" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Daily Dharma</Link>
                   <Link to="/temples" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Sacred Places</Link>
                   <Link to="/sadhana" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Sadhana</Link>
+                  <Link to="/dharma-path" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">My Path</Link>
                   <a href="/#sabha" className="font-body text-sm text-muted-foreground hover:text-foreground transition-colors">Sabhā</a>
                 </nav>
               </div>
