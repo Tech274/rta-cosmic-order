@@ -139,6 +139,36 @@ export type Database = {
         }
         Relationships: []
       }
+      email_subscriptions: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          is_active: boolean
+          preferred_category: string | null
+          unsubscribe_token: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          is_active?: boolean
+          preferred_category?: string | null
+          unsubscribe_token?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          is_active?: boolean
+          preferred_category?: string | null
+          unsubscribe_token?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       karma_history: {
         Row: {
           amount: number
