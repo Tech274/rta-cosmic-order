@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useToggleBookmark, useBookmarkedSubhashitas } from "@/hooks/useBookmarks";
 import { useToast } from "@/hooks/use-toast";
 import ShareQuoteModal from "./ShareQuoteModal";
+import AudioPronunciation from "./AudioPronunciation";
 import {
   type Subhashita,
   categoryLabels,
@@ -60,10 +61,17 @@ const SubhashitaCard = ({ subhashita, index = 0 }: SubhashitaCardProps) => {
           {categoryLabels[subhashita.category]}
         </Badge>
 
-        {/* Sanskrit text */}
-        <p className="font-sanskrit text-xl text-gold mb-3 leading-relaxed">
-          {subhashita.sanskrit}
-        </p>
+        {/* Sanskrit text with audio */}
+        <div className="flex items-start gap-2 mb-3">
+          <p className="font-sanskrit text-xl text-gold leading-relaxed flex-1">
+            {subhashita.sanskrit}
+          </p>
+          <AudioPronunciation 
+            text={subhashita.sanskrit} 
+            transliteration={subhashita.transliteration}
+            className="shrink-0 mt-1"
+          />
+        </div>
 
         {/* Transliteration */}
         <p className="font-body text-sm text-muted-foreground italic mb-4">
