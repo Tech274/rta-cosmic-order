@@ -8,6 +8,7 @@ import { useToggleBookmark, useBookmarkedSubhashitas } from "@/hooks/useBookmark
 import { useToast } from "@/hooks/use-toast";
 import ShareQuoteModal from "./ShareQuoteModal";
 import AudioPronunciation from "./AudioPronunciation";
+import AIExplanation from "./AIExplanation";
 import {
   type Subhashita,
   categoryLabels,
@@ -118,6 +119,9 @@ const SubhashitaCard = ({ subhashita, index = 0 }: SubhashitaCardProps) => {
             </Button>
           </div>
         </div>
+
+        {/* AI Explanation */}
+        <AIExplanation subhashita={subhashita} />
       </motion.div>
 
       <ShareQuoteModal
