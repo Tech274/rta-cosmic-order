@@ -14,6 +14,7 @@ import ScriptureDetail from "./pages/ScriptureDetail";
 import ChapterDetail from "./pages/ChapterDetail";
 import Sadhana from "./pages/Sadhana";
 import DailyDharma from "./pages/DailyDharma";
+import DharmaPath from "./pages/DharmaPath";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -36,6 +37,7 @@ const App = () => (
               <Route path="/scriptures/:scriptureId/chapters/:chapterId" element={<ChapterDetail />} />
               <Route path="/sadhana" element={<Sadhana />} />
               <Route path="/daily-dharma" element={<DailyDharma />} />
+              <Route path="/dharma-path" element={<DharmaPath />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

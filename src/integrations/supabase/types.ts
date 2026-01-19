@@ -165,29 +165,38 @@ export type Database = {
       }
       profiles: {
         Row: {
+          bio: string | null
           display_name: string | null
           id: string
+          ishta_devata: string | null
           joined_at: string
           karma: number
           membership_level: Database["public"]["Enums"]["membership_level"]
+          spiritual_goals: string[] | null
           updated_at: string
           user_id: string
         }
         Insert: {
+          bio?: string | null
           display_name?: string | null
           id?: string
+          ishta_devata?: string | null
           joined_at?: string
           karma?: number
           membership_level?: Database["public"]["Enums"]["membership_level"]
+          spiritual_goals?: string[] | null
           updated_at?: string
           user_id: string
         }
         Update: {
+          bio?: string | null
           display_name?: string | null
           id?: string
+          ishta_devata?: string | null
           joined_at?: string
           karma?: number
           membership_level?: Database["public"]["Enums"]["membership_level"]
+          spiritual_goals?: string[] | null
           updated_at?: string
           user_id?: string
         }
@@ -226,6 +235,39 @@ export type Database = {
           notes?: string | null
           session_type?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      scripture_reading_progress: {
+        Row: {
+          chapter_number: number
+          completed: boolean | null
+          created_at: string
+          id: string
+          last_read_at: string | null
+          scripture_id: string
+          user_id: string
+          verse_number: number | null
+        }
+        Insert: {
+          chapter_number: number
+          completed?: boolean | null
+          created_at?: string
+          id?: string
+          last_read_at?: string | null
+          scripture_id: string
+          user_id: string
+          verse_number?: number | null
+        }
+        Update: {
+          chapter_number?: number
+          completed?: boolean | null
+          created_at?: string
+          id?: string
+          last_read_at?: string | null
+          scripture_id?: string
+          user_id?: string
+          verse_number?: number | null
         }
         Relationships: []
       }
