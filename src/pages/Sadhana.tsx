@@ -6,8 +6,9 @@ import JapaCounter from "@/components/sadhana/JapaCounter";
 import MeditationTimer from "@/components/sadhana/MeditationTimer";
 import PracticeStats from "@/components/sadhana/PracticeStats";
 import RecentSessions from "@/components/sadhana/RecentSessions";
+import SankalpaTracker from "@/components/sadhana/SankalpaTracker";
+import PanchangCalendar from "@/components/panchang/PanchangCalendar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
 const Sadhana = () => {
   const [activeTab, setActiveTab] = useState("japa");
 
@@ -86,13 +87,28 @@ const Sadhana = () => {
         </div>
       </section>
 
+      {/* Sankalpa & Panchang Section */}
+      <section className="px-6 pb-12">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-6"
+          >
+            <SankalpaTracker />
+            <PanchangCalendar />
+          </motion.div>
+        </div>
+      </section>
+
       {/* Recent Sessions */}
       <section className="px-6 pb-20">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
           >
             <RecentSessions />
           </motion.div>

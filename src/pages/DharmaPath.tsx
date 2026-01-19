@@ -6,6 +6,8 @@ import { SpiritualProfile } from "@/components/dharmapath/SpiritualProfile";
 import { ReadingProgress } from "@/components/dharmapath/ReadingProgress";
 import { PracticeAchievements } from "@/components/dharmapath/PracticeAchievements";
 import { StreakTracker } from "@/components/dharmapath/StreakTracker";
+import SankalpaTracker from "@/components/sadhana/SankalpaTracker";
+import UpcomingEvents from "@/components/panchang/UpcomingEvents";
 import { useDharmaPath } from "@/hooks/useDharmaPath";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
@@ -101,6 +103,12 @@ const DharmaPath = () => {
             currentStreak={dharmaPath?.currentStreak || 0}
             longestStreak={dharmaPath?.longestStreak || 0}
           />
+
+          {/* Sankalpa Tracker */}
+          <SankalpaTracker />
+
+          {/* Upcoming Events */}
+          <UpcomingEvents />
 
           {/* Reading Progress - Full Width */}
           <div className="lg:col-span-2 xl:col-span-3">

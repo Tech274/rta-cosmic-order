@@ -193,6 +193,42 @@ export type Database = {
         }
         Relationships: []
       }
+      panchang_events: {
+        Row: {
+          created_at: string
+          description: string | null
+          event_date: string
+          event_name: string
+          event_type: string
+          id: string
+          is_fasting_day: boolean
+          nakshatra: string | null
+          tithi: string | null
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          event_date: string
+          event_name: string
+          event_type: string
+          id?: string
+          is_fasting_day?: boolean
+          nakshatra?: string | null
+          tithi?: string | null
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          event_date?: string
+          event_name?: string
+          event_type?: string
+          id?: string
+          is_fasting_day?: boolean
+          nakshatra?: string | null
+          tithi?: string | null
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           bio: string | null
@@ -268,6 +304,48 @@ export type Database = {
         }
         Relationships: []
       }
+      sankalpas: {
+        Row: {
+          category: string
+          completed_at: string | null
+          created_at: string
+          description: string | null
+          id: string
+          is_completed: boolean
+          progress: number
+          target_date: string | null
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          category?: string
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_completed?: boolean
+          progress?: number
+          target_date?: string | null
+          title: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          category?: string
+          completed_at?: string | null
+          created_at?: string
+          description?: string | null
+          id?: string
+          is_completed?: boolean
+          progress?: number
+          target_date?: string | null
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       scripture_reading_progress: {
         Row: {
           chapter_number: number
@@ -336,6 +414,41 @@ export type Database = {
             columns: ["reply_id"]
             isOneToOne: false
             referencedRelation: "discussion_replies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_event_reminders: {
+        Row: {
+          created_at: string
+          event_id: string | null
+          id: string
+          is_notified: boolean
+          reminder_time: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_id?: string | null
+          id?: string
+          is_notified?: boolean
+          reminder_time: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          event_id?: string | null
+          id?: string
+          is_notified?: boolean
+          reminder_time?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_event_reminders_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "panchang_events"
             referencedColumns: ["id"]
           },
         ]
