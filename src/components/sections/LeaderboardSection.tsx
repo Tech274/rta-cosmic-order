@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Trophy, Crown, Medal, Star, Flame, BookOpen, Sparkles } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -199,47 +200,48 @@ const LeaderboardSection = () => {
     return (
       <div className="space-y-2">
         {leaders.map((leader, index) => (
-          <motion.div
-            key={leader.id}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: index * 0.05 }}
-            className={`flex items-center gap-4 p-3 rounded-lg transition-colors ${
-              index === 0
-                ? "bg-yellow-50/50 dark:bg-yellow-900/10 border border-yellow-200/50 dark:border-yellow-800/30"
-                : "hover:bg-muted/50"
-            }`}
-          >
-            <div className="flex items-center justify-center w-8">
-              <RankIcon rank={index + 1} />
-            </div>
-            
-            <div className="flex-1 min-w-0">
-              <p className="font-medium text-foreground truncate">
-                {leader.display_name || "Anonymous Seeker"}
-              </p>
-              <Badge 
-                variant="secondary" 
-                className={`text-xs ${levelColors[leader.membership_level] || ""}`}
-              >
-                {levelLabels[leader.membership_level] || leader.membership_level}
-              </Badge>
-            </div>
-            
-            <div className="text-right flex items-center gap-2">
-              {icon}
-              <div>
-                <p className="font-bold text-foreground">
-                  {valueKey === "karma" 
-                    ? leader.karma.toLocaleString() 
-                    : valueKey === "streak" 
-                    ? leader.streak 
-                    : leader.chapters_read}
-                </p>
-                <p className="text-xs text-muted-foreground">{valueLabel}</p>
+          <Link key={leader.id} to={`/profile/${leader.user_id}`}>
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.05 }}
+              className={`flex items-center gap-4 p-3 rounded-lg transition-colors cursor-pointer ${
+                index === 0
+                  ? "bg-yellow-50/50 dark:bg-yellow-900/10 border border-yellow-200/50 dark:border-yellow-800/30"
+                  : "hover:bg-muted/50"
+              }`}
+            >
+              <div className="flex items-center justify-center w-8">
+                <RankIcon rank={index + 1} />
               </div>
-            </div>
-          </motion.div>
+              
+              <div className="flex-1 min-w-0">
+                <p className="font-medium text-foreground truncate hover:text-primary transition-colors">
+                  {leader.display_name || "Anonymous Seeker"}
+                </p>
+                <Badge 
+                  variant="secondary" 
+                  className={`text-xs ${levelColors[leader.membership_level] || ""}`}
+                >
+                  {levelLabels[leader.membership_level] || leader.membership_level}
+                </Badge>
+              </div>
+              
+              <div className="text-right flex items-center gap-2">
+                {icon}
+                <div>
+                  <p className="font-bold text-foreground">
+                    {valueKey === "karma" 
+                      ? leader.karma.toLocaleString() 
+                      : valueKey === "streak" 
+                      ? leader.streak 
+                      : leader.chapters_read}
+                  </p>
+                  <p className="text-xs text-muted-foreground">{valueLabel}</p>
+                </div>
+              </div>
+            </motion.div>
+          </Link>
         ))}
       </div>
     );

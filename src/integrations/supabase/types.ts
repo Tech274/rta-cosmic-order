@@ -14,6 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
+      achievements: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          icon: string
+          id: string
+          karma_reward: number
+          name: string
+          rarity: string
+          requirement_type: string
+          requirement_value: number
+          slug: string
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description: string
+          icon?: string
+          id?: string
+          karma_reward?: number
+          name: string
+          rarity?: string
+          requirement_type: string
+          requirement_value?: number
+          slug: string
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          icon?: string
+          id?: string
+          karma_reward?: number
+          name?: string
+          rarity?: string
+          requirement_type?: string
+          requirement_value?: number
+          slug?: string
+        }
+        Relationships: []
+      }
       bookmarked_subhashitas: {
         Row: {
           created_at: string
@@ -418,6 +460,35 @@ export type Database = {
           },
         ]
       }
+      user_achievements: {
+        Row: {
+          achievement_id: string
+          earned_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          achievement_id: string
+          earned_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          achievement_id?: string
+          earned_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_achievements_achievement_id_fkey"
+            columns: ["achievement_id"]
+            isOneToOne: false
+            referencedRelation: "achievements"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_event_reminders: {
         Row: {
           created_at: string
@@ -461,6 +532,21 @@ export type Database = {
       add_karma: {
         Args: { p_amount: number; p_reason: string; p_user_id: string }
         Returns: undefined
+      }
+      check_and_award_achievements: {
+        Args: { p_user_id: string }
+        Returns: {
+          achievement_id: string
+          earned_at: string
+          id: string
+          user_id: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "user_achievements"
+          isOneToOne: false
+          isSetofReturn: true
+        }
       }
       increment_discussion_views: {
         Args: { p_discussion_id: string }
