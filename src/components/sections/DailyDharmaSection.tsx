@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Sparkles, RefreshCw, Quote } from "lucide-react";
+import { Sparkles, RefreshCw, Quote, Share2, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
+import ShareQuoteModal from "@/components/dailydharma/ShareQuoteModal";
 import { 
   getDailySubhashita, 
   getRandomSubhashita, 
@@ -17,6 +19,7 @@ const DailyDharmaSection = () => {
   const [currentSubhashita, setCurrentSubhashita] = useState<Subhashita>(getDailySubhashita());
   const [selectedCategory, setSelectedCategory] = useState<SubhashitaCategory | "all">("all");
   const [isAnimating, setIsAnimating] = useState(false);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
 
   const handleRefresh = () => {
     setIsAnimating(true);
@@ -130,7 +133,7 @@ const DailyDharmaSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: isAnimating ? 0 : 1, y: isAnimating ? 20 : 0 }}
             transition={{ duration: 0.3 }}
-            className="bg-card border border-border p-8 md:p-12 relative"
+            className="bg-card border border-border p-8 md:p-12 relative rounded-lg shadow-lg"
           >
             {/* Category Badge */}
             <div className="mb-6">
@@ -169,8 +172,16 @@ const DailyDharmaSection = () => {
               </p>
             )}
 
-            {/* Refresh Button */}
-            <div className="absolute top-6 right-6">
+            {/* Action Buttons */}
+            <div className="absolute top-6 right-6 flex gap-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setShareModalOpen(true)}
+                className="text-muted-foreground hover:text-gold hover:bg-gold/10"
+              >
+                <Share2 className="w-4 h-4" />
+              </Button>
               <Button
                 variant="ghost"
                 size="icon"
@@ -182,7 +193,30 @@ const DailyDharmaSection = () => {
             </div>
           </motion.div>
         </motion.div>
+
+        {/* Explore More Link */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="text-center mt-8"
+        >
+          <Link to="/daily-dharma">
+            <Button variant="outline" className="gap-2 border-gold/30 text-gold hover:bg-gold/10">
+              Explore All Wisdom
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </Link>
+        </motion.div>
       </div>
+
+      {/* Share Modal */}
+      <ShareQuoteModal
+        isOpen={shareModalOpen}
+        onClose={() => setShareModalOpen(false)}
+        subhashita={currentSubhashita}
+      />
     </section>
   );
 };
