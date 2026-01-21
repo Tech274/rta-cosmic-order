@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import Header from "@/components/Header";
@@ -9,14 +10,25 @@ import { StreakTracker } from "@/components/dharmapath/StreakTracker";
 import SankalpaTracker from "@/components/sadhana/SankalpaTracker";
 import UpcomingEvents from "@/components/panchang/UpcomingEvents";
 import SpiritualReportCard from "@/components/report/SpiritualReportCard";
+import AchievementsGrid from "@/components/achievements/AchievementsGrid";
 import { useDharmaPath } from "@/hooks/useDharmaPath";
 import { useAuth } from "@/hooks/useAuth";
+import { useCheckAchievements } from "@/hooks/useAchievements";
 import { Button } from "@/components/ui/button";
-import { Compass, Loader2, LogIn } from "lucide-react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Compass, Loader2, LogIn, Award } from "lucide-react";
 
 const DharmaPath = () => {
   const { user, loading: authLoading } = useAuth();
   const { dharmaPath, loading, updateSpiritualProfile } = useDharmaPath();
+  const checkAchievements = useCheckAchievements();
+
+  // Check for new achievements when the page loads
+  useEffect(() => {
+    if (user && !loading) {
+      checkAchievements.mutate();
+    }
+  }, [user, loading]);
 
   if (authLoading || loading) {
     return (
@@ -113,6 +125,21 @@ const DharmaPath = () => {
 
           {/* Spiritual Report Card */}
           <SpiritualReportCard />
+
+          {/* Achievements Grid - Full Width */}
+          <div className="lg:col-span-2 xl:col-span-3">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Award className="w-5 h-5 text-primary" />
+                  Your Achievements
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <AchievementsGrid />
+              </CardContent>
+            </Card>
+          </div>
 
           {/* Reading Progress - Full Width */}
           <div className="lg:col-span-2 xl:col-span-3">
