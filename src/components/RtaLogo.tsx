@@ -216,14 +216,50 @@ const RtaLogo = ({ className = "", size = 200, animate = true }: { className?: s
         {...scaleAnimation(1.7, 0.6)}
       />
 
-      {/* Central Dot - Ātman (consciousness, witness) with glow */}
+      {/* Central Dot - Ātman (consciousness, witness) with breathing animation */}
       <motion.circle
         cx="100"
         cy="100"
         r="6"
         fill="currentColor"
         filter="url(#innerGlow)"
-        {...scaleAnimation(1.8)}
+        initial={animate ? { scale: 0, opacity: 0 } : { scale: 1, opacity: 1 }}
+        animate={animate ? { 
+          scale: [1, 1.15, 1],
+          opacity: 1 
+        } : { scale: 1, opacity: 1 }}
+        transition={animate ? {
+          scale: {
+            duration: 4,
+            ease: [0.4, 0, 0.6, 1],
+            repeat: Infinity,
+            repeatDelay: 0.5,
+            delay: 2.5
+          },
+          opacity: { duration: 0.6, delay: 1.8 }
+        } : undefined}
+      />
+
+      {/* Breathing glow ring around bindu */}
+      <motion.circle
+        cx="100"
+        cy="100"
+        r="8"
+        stroke="currentColor"
+        strokeWidth="0.8"
+        fill="none"
+        initial={animate ? { scale: 0, opacity: 0 } : { scale: 1, opacity: 0.3 }}
+        animate={animate ? { 
+          scale: [1, 1.3, 1],
+          opacity: [0.3, 0.1, 0.3]
+        } : { scale: 1, opacity: 0.3 }}
+        transition={animate ? {
+          duration: 4,
+          ease: [0.4, 0, 0.6, 1],
+          repeat: Infinity,
+          repeatDelay: 0.5,
+          delay: 2.5
+        } : undefined}
       />
 
       {/* Cardinal points with enhanced styling */}

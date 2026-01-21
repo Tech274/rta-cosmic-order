@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+import { Library } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import JapaCounter from "@/components/sadhana/JapaCounter";
@@ -9,6 +11,8 @@ import RecentSessions from "@/components/sadhana/RecentSessions";
 import SankalpaTracker from "@/components/sadhana/SankalpaTracker";
 import PanchangCalendar from "@/components/panchang/PanchangCalendar";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+
 const Sadhana = () => {
   const [activeTab, setActiveTab] = useState("japa");
 
@@ -81,6 +85,16 @@ const Sadhana = () => {
 
               <TabsContent value="meditation">
                 <MeditationTimer />
+                
+                {/* Link to Full Meditation Library */}
+                <div className="mt-6 text-center">
+                  <Link to="/meditation">
+                    <Button variant="outline" className="gap-2">
+                      <Library className="w-4 h-4" />
+                      Explore Full Meditation Library
+                    </Button>
+                  </Link>
+                </div>
               </TabsContent>
             </Tabs>
           </motion.div>
