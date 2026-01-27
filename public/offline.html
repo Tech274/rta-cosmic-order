@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offline - ṚTA</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Georgia, 'Times New Roman', serif;
+      background-color: #0c0a09;
+      color: #f5f5f4;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    
+    .container {
+      text-align: center;
+      max-width: 400px;
+    }
+    
+    .logo {
+      font-size: 48px;
+      letter-spacing: 0.3em;
+      color: #d4a574;
+      margin-bottom: 8px;
+    }
+    
+    .subtitle {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: #a8a29e;
+      text-transform: uppercase;
+      margin-bottom: 48px;
+    }
+    
+    .icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 24px;
+      opacity: 0.5;
+    }
+    
+    .icon svg {
+      width: 100%;
+      height: 100%;
+      stroke: #d4a574;
+      fill: none;
+      stroke-width: 1.5;
+    }
+    
+    h1 {
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 16px;
+      color: #f5f5f4;
+    }
+    
+    p {
+      color: #a8a29e;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    
+    .retry-btn {
+      display: inline-block;
+      background-color: #d4a574;
+      color: #1c1917;
+      padding: 12px 32px;
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 0.1em;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity 0.2s;
+    }
+    
+    .retry-btn:hover {
+      opacity: 0.9;
+    }
+    
+    .sanskrit {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid #292524;
+    }
+    
+    .sanskrit-text {
+      font-size: 18px;
+      color: #d4a574;
+      margin-bottom: 8px;
+    }
+    
+    .sanskrit-meaning {
+      font-size: 14px;
+      color: #78716c;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">ṚTA</div>
+    <div class="subtitle">Cosmic Order</div>
+    
+    <div class="icon">
+      <svg viewBox="0 0 24 24">
+        <path d="M1 1h22v22H1z" stroke-dasharray="4 2"/>
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 2v4M12 18v4M2 12h4M18 12h4"/>
+      </svg>
+    </div>
+    
+    <h1>You're Offline</h1>
+    <p>
+      It seems you've lost your connection to the digital realm. 
+      Like the eternal cycle of creation, connection will return.
+    </p>
+    
+    <button class="retry-btn" onclick="window.location.reload()">
+      TRY AGAIN
+    </button>
+    
+    <div class="sanskrit">
+      <div class="sanskrit-text">सत्यमेव जयते</div>
+      <div class="sanskrit-meaning">"Truth alone triumphs"</div>
+    </div>
+  </div>
+</body>
+</html>

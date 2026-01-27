@@ -19,6 +19,7 @@ import { useAudioPlayer } from "@/contexts/AudioPlayerContext";
 import SleepTimer from "./SleepTimer";
 import BookmarksPanel from "./BookmarksPanel";
 import PlaybackSpeedControl from "./PlaybackSpeedControl";
+import AnnotationsPanel from "./AnnotationsPanel";
 
 const FullPlayer = () => {
   const {
@@ -111,12 +112,15 @@ const FullPlayer = () => {
           <div className="flex items-center gap-2">
             <SleepTimer onSleepTrigger={pause} />
             {audiobook && (
-              <BookmarksPanel 
-                audiobookId={audiobook.id}
-                currentTime={currentTime}
-                currentChapter={currentChapter}
-                onSeek={seek}
-              />
+              <>
+                <BookmarksPanel 
+                  audiobookId={audiobook.id}
+                  currentTime={currentTime}
+                  currentChapter={currentChapter}
+                  onSeek={seek}
+                />
+                <AnnotationsPanel />
+              </>
             )}
           </div>
           <h2 className="font-display text-lg text-foreground">Now Playing</h2>
