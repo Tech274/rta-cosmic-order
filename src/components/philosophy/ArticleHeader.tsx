@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
+import SanskritPronunciation from "./SanskritPronunciation";
 import { categoryLabels, type PhilosophyArticle } from "@/data/philosophyArticles";
 
 interface ArticleHeaderProps {
@@ -34,9 +35,9 @@ const ArticleHeader = ({ article }: ArticleHeaderProps) => {
         {article.title}
       </h1>
 
-      {/* Sanskrit */}
+      {/* Sanskrit with Audio Pronunciation */}
       {article.sanskritTitle && (
-        <div className="flex items-baseline gap-4 mb-6">
+        <div className="flex items-center gap-3 mb-6">
           <span className="font-display text-2xl text-gold">
             {article.sanskritTitle}
           </span>
@@ -45,6 +46,11 @@ const ArticleHeader = ({ article }: ArticleHeaderProps) => {
               ({article.transliteration})
             </span>
           )}
+          <SanskritPronunciation
+            text={article.sanskritTitle}
+            transliteration={article.transliteration}
+            size="md"
+          />
         </div>
       )}
 

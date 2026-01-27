@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import PhilosophyNav from "@/components/philosophy/PhilosophyNav";
 import PhilosophyArticleView from "@/components/philosophy/PhilosophyArticleView";
+import PhilosophyToolbar from "@/components/philosophy/PhilosophyToolbar";
 import { getArticleById, philosophyArticles } from "@/data/philosophyArticles";
 
 const Philosophy = () => {
@@ -32,7 +33,12 @@ const Philosophy = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <PhilosophyNav />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
+        <div className="flex items-center justify-between">
+          <PhilosophyNav />
+          <PhilosophyToolbar currentArticleId={article.id} />
+        </div>
+      </div>
       <PhilosophyArticleView article={article} />
       <Footer />
     </div>
