@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import ArticleHeader from "./ArticleHeader";
 import ArticleContent from "./ArticleContent";
 import CrossReferences from "./CrossReferences";
@@ -11,7 +10,7 @@ interface PhilosophyArticleViewProps {
 
 const PhilosophyArticleView = ({ article }: PhilosophyArticleViewProps) => {
   return (
-    <article className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+    <article className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
       <div className="grid lg:grid-cols-[1fr,320px] gap-12">
         {/* Main Content */}
         <div>
