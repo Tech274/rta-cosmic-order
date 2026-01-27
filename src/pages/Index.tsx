@@ -10,6 +10,7 @@ import QuestionsSection from "@/components/sections/QuestionsSection";
 import SchoolsSection from "@/components/sections/SchoolsSection";
 import DebatesSection from "@/components/sections/DebatesSection";
 import SabhaSection from "@/components/sections/SabhaSection";
+import BlogSection from "@/components/sections/BlogSection";
 import ForumSection from "@/components/forum/ForumSection";
 import LeaderboardSection from "@/components/sections/LeaderboardSection";
 import CuratorSection from "@/components/sections/CuratorSection";
@@ -30,6 +31,7 @@ const Index = () => {
       <SchoolsSection />
       <DebatesSection />
       <SabhaSection />
+      <BlogSection />
       <ForumSection />
       <LeaderboardSection />
       <CuratorSection />
