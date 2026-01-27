@@ -9,12 +9,13 @@ import BlogEditor from "@/components/admin/BlogEditor";
 import ContentList from "@/components/admin/ContentList";
 import AudiobookManager from "@/components/admin/AudiobookManager";
 import GalleryManager from "@/components/admin/GalleryManager";
+import UserRoleManager from "@/components/admin/UserRoleManager";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Loader2, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-type AdminView = 'overview' | 'blog-list' | 'blog-editor' | 'audiobooks' | 'galleries' | 'content';
+type AdminView = 'overview' | 'blog-list' | 'blog-editor' | 'audiobooks' | 'galleries' | 'content' | 'users';
 
 const Admin = () => {
   const { user, loading: authLoading } = useAuth();
@@ -86,6 +87,8 @@ const Admin = () => {
         return <GalleryManager />;
       case 'content':
         return <ContentList type="all" onEdit={handleEditPost} />;
+      case 'users':
+        return <UserRoleManager />;
       default:
         return <AdminOverview />;
     }

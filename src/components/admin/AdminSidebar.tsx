@@ -6,12 +6,13 @@ import {
   Image, 
   BookOpen, 
   Plus,
-  ChevronRight
+  ChevronRight,
+  Users
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-type AdminView = 'overview' | 'blog-list' | 'blog-editor' | 'audiobooks' | 'galleries' | 'content';
+type AdminView = 'overview' | 'blog-list' | 'blog-editor' | 'audiobooks' | 'galleries' | 'content' | 'users';
 
 interface AdminSidebarProps {
   currentView: AdminView;
@@ -25,6 +26,7 @@ const menuItems = [
   { id: 'audiobooks', label: 'Audiobooks', icon: Headphones },
   { id: 'galleries', label: 'Galleries', icon: Image },
   { id: 'content', label: 'All Content', icon: BookOpen },
+  { id: 'users', label: 'User Roles', icon: Users },
 ] as const;
 
 const AdminSidebar = ({ currentView, onViewChange, onNewPost }: AdminSidebarProps) => {
