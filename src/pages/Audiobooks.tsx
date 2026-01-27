@@ -1,17 +1,14 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
 import { Headphones, Clock, Search, Filter, Play, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import AudiobookPlayer from "@/components/audiobook/AudiobookPlayer";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-
+import { useAudioPlayer } from "@/contexts/AudioPlayerContext";
 interface Chapter {
   number: number;
   title: string;
@@ -50,12 +47,12 @@ const categories = [
 
 const Audiobooks = () => {
   const { user } = useAuth();
+  const { play, audiobook: currentAudiobook } = useAudioPlayer();
   const [audiobooks, setAudiobooks] = useState<Audiobook[]>([]);
   const [progress, setProgress] = useState<AudiobookProgress[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
-  const [selectedAudiobook, setSelectedAudiobook] = useState<Audiobook | null>(null);
 
   useEffect(() => {
     fetchAudiobooks();
@@ -121,6 +118,11 @@ const Audiobooks = () => {
     progress.some(p => p.audiobook_id === book.id && p.current_position_seconds > 0)
   );
 
+  const handlePlayAudiobook = (book: Audiobook) => {
+    const bookProgress = getProgress(book.id);
+    play(book, bookProgress);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -183,8 +185,10 @@ const Audiobooks = () => {
                 return (
                   <motion.button
                     key={book.id}
-                    onClick={() => setSelectedAudiobook(book)}
-                    className="flex items-center gap-4 p-4 bg-card border border-border rounded-lg hover:border-primary/50 transition-colors text-left"
+                    onClick={() => handlePlayAudiobook(book)}
+                    className={`flex items-center gap-4 p-4 bg-card border rounded-lg hover:border-primary/50 transition-colors text-left ${
+                      currentAudiobook?.id === book.id ? 'border-primary' : 'border-border'
+                    }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -237,8 +241,10 @@ const Audiobooks = () => {
                   transition={{ delay: index * 0.05 }}
                 >
                   <button
-                    onClick={() => setSelectedAudiobook(book)}
-                    className="w-full text-left bg-card border border-border rounded-lg overflow-hidden hover:border-primary/50 transition-colors group"
+                    onClick={() => handlePlayAudiobook(book)}
+                    className={`w-full text-left bg-card border rounded-lg overflow-hidden hover:border-primary/50 transition-colors group ${
+                      currentAudiobook?.id === book.id ? 'border-primary' : 'border-border'
+                    }`}
                   >
                     <div className="aspect-square bg-muted relative">
                       {book.cover_image ? (
@@ -281,15 +287,6 @@ const Audiobooks = () => {
       </main>
 
       <Footer />
-
-      {/* Audiobook Player Modal */}
-      {selectedAudiobook && (
-        <AudiobookPlayer 
-          audiobook={selectedAudiobook}
-          onClose={() => setSelectedAudiobook(null)}
-          initialProgress={getProgress(selectedAudiobook.id)}
-        />
-      )}
     </div>
   );
 };
