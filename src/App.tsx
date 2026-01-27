@@ -17,6 +17,7 @@ import DailyDharma from "./pages/DailyDharma";
 import DharmaPath from "./pages/DharmaPath";
 import Profile from "./pages/Profile";
 import Meditation from "./pages/Meditation";
+import Philosophy from "./pages/Philosophy";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -42,6 +43,8 @@ const App = () => (
               <Route path="/dharma-path" element={<DharmaPath />} />
               <Route path="/profile/:userId" element={<Profile />} />
               <Route path="/meditation" element={<Meditation />} />
+              <Route path="/philosophy" element={<Philosophy />} />
+              <Route path="/philosophy/:articleId" element={<Philosophy />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
