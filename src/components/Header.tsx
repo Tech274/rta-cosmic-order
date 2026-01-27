@@ -6,12 +6,13 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import AuthModal from "@/components/auth/AuthModal";
 import UserMenu from "@/components/auth/UserMenu";
-import { Menu, X, BookOpen, Sun, MapPin, Compass, Users, Flame } from "lucide-react";
+import { Menu, X, BookOpen, Sun, MapPin, Compass, Users, Flame, Headphones } from "lucide-react";
 
 const navLinks = [
   { href: "/scriptures", label: "Scriptures", icon: BookOpen },
   { href: "/daily-dharma", label: "Daily Dharma", icon: Sun },
   { href: "/temples", label: "Sacred Places", icon: MapPin },
+  { href: "/audiobooks", label: "Audiobooks", icon: Headphones },
   { href: "/sadhana", label: "Sadhana", icon: Flame },
   { href: "/dharma-path", label: "My Path", icon: Compass },
   { href: "/#sabha", label: "Sabhā", icon: Users, isHash: true },
