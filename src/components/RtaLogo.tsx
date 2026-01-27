@@ -1,6 +1,13 @@
+import React, { forwardRef } from "react";
 import { motion, type Transition } from "framer-motion";
 
-const RtaLogo = ({ className = "", size = 200, animate = true }: { className?: string; size?: number; animate?: boolean }) => {
+interface RtaLogoProps {
+  className?: string;
+  size?: number;
+  animate?: boolean;
+}
+
+const RtaLogo = forwardRef<SVGSVGElement, RtaLogoProps>(({ className = "", size = 200, animate = true }, ref) => {
   const baseTransition: Transition = { duration: 1.2, ease: [0.25, 0.46, 0.45, 0.94] };
   
   const animationProps = animate ? {
@@ -315,6 +322,8 @@ const RtaLogo = ({ className = "", size = 200, animate = true }: { className?: s
       ))}
     </motion.svg>
   );
-};
+});
+
+RtaLogo.displayName = "RtaLogo";
 
 export default RtaLogo;

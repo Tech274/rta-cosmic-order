@@ -56,6 +56,50 @@ export type Database = {
         }
         Relationships: []
       }
+      audiobook_progress: {
+        Row: {
+          audiobook_id: string
+          created_at: string
+          current_chapter: number
+          current_position_seconds: number
+          id: string
+          is_completed: boolean
+          last_played_at: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          audiobook_id: string
+          created_at?: string
+          current_chapter?: number
+          current_position_seconds?: number
+          id?: string
+          is_completed?: boolean
+          last_played_at?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          audiobook_id?: string
+          created_at?: string
+          current_chapter?: number
+          current_position_seconds?: number
+          id?: string
+          is_completed?: boolean
+          last_played_at?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "audiobook_progress_audiobook_id_fkey"
+            columns: ["audiobook_id"]
+            isOneToOne: false
+            referencedRelation: "audiobooks"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       audiobooks: {
         Row: {
           audio_url: string | null

@@ -20,6 +20,8 @@ import Profile from "./pages/Profile";
 import Meditation from "./pages/Meditation";
 import Philosophy from "./pages/Philosophy";
 import Blog from "./pages/Blog";
+import Admin from "./pages/Admin";
+import Audiobooks from "./pages/Audiobooks";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -51,6 +53,8 @@ const App = () => (
               <Route path="/philosophy/:articleId" element={<Philosophy />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<Blog />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/audiobooks" element={<Audiobooks />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
