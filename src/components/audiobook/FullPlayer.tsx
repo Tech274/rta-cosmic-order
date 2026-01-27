@@ -16,6 +16,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { useAudioPlayer } from "@/contexts/AudioPlayerContext";
+import SleepTimer from "./SleepTimer";
+import BookmarksPanel from "./BookmarksPanel";
 
 const FullPlayer = () => {
   const {
@@ -36,6 +38,7 @@ const FullPlayer = () => {
     setPlaybackRate,
     goToChapter,
     closeFullPlayer,
+    pause,
   } = useAudioPlayer();
 
   const [showChapters, setShowChapters] = useState(false);
@@ -110,9 +113,17 @@ const FullPlayer = () => {
       <div className="h-full flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-4 border-b border-border">
-          <Button variant="ghost" size="icon" onClick={closeFullPlayer}>
-            <X className="w-5 h-5" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <SleepTimer onSleepTrigger={pause} />
+            {audiobook && (
+              <BookmarksPanel 
+                audiobookId={audiobook.id}
+                currentTime={currentTime}
+                currentChapter={currentChapter}
+                onSeek={seek}
+              />
+            )}
+          </div>
           <h2 className="font-display text-lg text-foreground">Now Playing</h2>
           <Button 
             variant="ghost" 
