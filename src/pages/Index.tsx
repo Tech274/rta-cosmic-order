@@ -3,6 +3,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import WhatIsRtaSection from "@/components/sections/WhatIsRtaSection";
 import VerseOfDaySection from "@/components/sections/VerseOfDaySection";
 import DailyDharmaSection from "@/components/sections/DailyDharmaSection";
+import PhilosophyPreviewSection from "@/components/sections/PhilosophyPreviewSection";
 import ScripturesSection from "@/components/sections/ScripturesSection";
 import SacredPlacesSection from "@/components/sections/SacredPlacesSection";
 import QuestionsSection from "@/components/sections/QuestionsSection";
@@ -22,6 +23,7 @@ const Index = () => {
       <WhatIsRtaSection />
       <VerseOfDaySection />
       <DailyDharmaSection />
+      <PhilosophyPreviewSection />
       <ScripturesSection />
       <SacredPlacesSection />
       <QuestionsSection />
