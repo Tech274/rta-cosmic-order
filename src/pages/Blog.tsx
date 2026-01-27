@@ -5,15 +5,36 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BlogCard from "@/components/blog/BlogCard";
 import { ReadingModeProvider, ReadingModeToggle, ReadingModeWrapper, useReadingMode } from "@/components/blog/ReadingMode";
-import { sampleBlogPosts, blogCategories, getBlogPostBySlug } from "@/data/blogPosts";
-import { useState } from "react";
+import BlogMetaTags from "@/components/blog/BlogMetaTags";
+import ShareButtons from "@/components/blog/ShareButtons";
+import OfflineReadingManager, { getOfflinePost } from "@/components/blog/OfflineReadingManager";
+import { sampleBlogPosts, blogCategories, getBlogPostBySlug, BlogPost } from "@/data/blogPosts";
+import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
+const SITE_URL = typeof window !== "undefined" ? window.location.origin : "https://rta-cosmic-order.lovable.app";
+
 const BlogPostContent = () => {
   const { slug } = useParams();
-  const post = slug ? getBlogPostBySlug(slug) : null;
   const { settings } = useReadingMode();
+  const [post, setPost] = useState<BlogPost | undefined>(undefined);
+  const [isOffline, setIsOffline] = useState(false);
+
+  useEffect(() => {
+    if (!slug) return;
+    
+    // Try to get from online first
+    let foundPost = getBlogPostBySlug(slug);
+    
+    // If not found or offline, try offline storage
+    if (!foundPost && !navigator.onLine) {
+      foundPost = getOfflinePost(slug);
+      if (foundPost) setIsOffline(true);
+    }
+    
+    setPost(foundPost);
+  }, [slug]);
 
   if (!post) {
     return (
@@ -26,114 +47,144 @@ const BlogPostContent = () => {
     );
   }
 
-  return (
-    <ReadingModeWrapper>
-      <article className={cn(
-        "max-w-4xl mx-auto",
-        !settings.enabled && "px-6 py-12"
-      )}>
-        {/* Back Button & Reading Mode Toggle */}
-        <div className="flex items-center justify-between mb-8">
-          <Link to="/blog">
-            <Button variant="ghost" size="sm" className="gap-2">
-              <ArrowLeft className="w-4 h-4" />
-              Back to Blog
-            </Button>
-          </Link>
-          <ReadingModeToggle />
-        </div>
+  const postUrl = `${SITE_URL}/blog/${post.slug}`;
 
-        {/* Header */}
-        <header className="mb-8">
-          <div className="flex flex-wrap items-center gap-3 mb-4">
-            <span className={cn(
-              "text-sm font-medium uppercase tracking-wider",
-              settings.enabled ? "text-amber-600" : "text-primary"
-            )}>
-              {post.category}
-            </span>
-            <span className="text-muted-foreground">•</span>
-            <span className="flex items-center gap-1 text-sm text-muted-foreground">
-              <Clock className="w-4 h-4" />
-              {post.readTime} min read
-            </span>
-            <span className="text-muted-foreground">•</span>
-            <span className="flex items-center gap-1 text-sm text-muted-foreground">
-              <Calendar className="w-4 h-4" />
-              {new Date(post.publishedAt).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-              })}
-            </span>
+  return (
+    <>
+      <BlogMetaTags post={post} siteUrl={SITE_URL} />
+      <ReadingModeWrapper>
+        <article className={cn(
+          "max-w-4xl mx-auto",
+          !settings.enabled && "px-6 py-12"
+        )}>
+          {/* Back Button & Actions */}
+          <div className="flex items-center justify-between mb-8 flex-wrap gap-3">
+            <Link to="/blog">
+              <Button variant="ghost" size="sm" className="gap-2">
+                <ArrowLeft className="w-4 h-4" />
+                Back to Blog
+              </Button>
+            </Link>
+            <div className="flex items-center gap-2">
+              <OfflineReadingManager post={post} />
+              <ShareButtons 
+                title={post.title} 
+                excerpt={post.excerpt} 
+                url={postUrl} 
+              />
+              <ReadingModeToggle />
+            </div>
           </div>
 
-          <h1 className={cn(
-            "font-display text-3xl md:text-4xl lg:text-5xl mb-4",
-            settings.enabled ? "" : "text-foreground"
+          {/* Offline indicator */}
+          {isOffline && (
+            <div className="mb-4 px-4 py-2 bg-amber-500/10 border border-amber-500/30 rounded-lg text-sm text-amber-600 dark:text-amber-400">
+              Reading from offline storage
+            </div>
+          )}
+
+          {/* Header */}
+          <header className="mb-8">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className={cn(
+                "text-sm font-medium uppercase tracking-wider",
+                settings.enabled ? "text-amber-600" : "text-primary"
+              )}>
+                {post.category}
+              </span>
+              <span className="text-muted-foreground">•</span>
+              <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                <Clock className="w-4 h-4" />
+                {post.readTime} min read
+              </span>
+              <span className="text-muted-foreground">•</span>
+              <span className="flex items-center gap-1 text-sm text-muted-foreground">
+                <Calendar className="w-4 h-4" />
+                {new Date(post.publishedAt).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </span>
+            </div>
+
+            <h1 className={cn(
+              "font-display text-3xl md:text-4xl lg:text-5xl mb-4",
+              settings.enabled ? "" : "text-foreground"
+            )}>
+              {post.title}
+            </h1>
+
+            <p className={cn(
+              "text-lg",
+              settings.enabled ? "opacity-80" : "text-muted-foreground"
+            )}>
+              {post.excerpt}
+            </p>
+          </header>
+
+          {/* Content */}
+          <div className={cn(
+            "prose prose-lg max-w-none",
+            settings.enabled ? "" : "dark:prose-invert"
           )}>
-            {post.title}
-          </h1>
+            <p>{post.content}</p>
+            
+            {/* Extended sample content for reading mode demo */}
+            <h2>The Nature of Dharmic Living</h2>
+            <p>
+              In the vast tapestry of Sanātana Dharma, each thread represents a unique path toward the ultimate truth. 
+              The sages of ancient Bhārata understood that the cosmic order, known as Ṛta, permeates all aspects of existence—
+              from the grand movements of celestial bodies to the subtle stirrings of the human heart.
+            </p>
+            <p>
+              When we align our actions with this divine order, we experience what the Upaniṣads call "śānti"—
+              a profound peace that transcends the fluctuations of worldly circumstances. This is not mere 
+              passivity but a dynamic harmony, like the stillness at the center of a spinning wheel.
+            </p>
+            
+            <blockquote>
+              धर्मो रक्षति रक्षितः — Dharma protects those who protect Dharma.
+            </blockquote>
+            
+            <h2>Practical Applications</h2>
+            <p>
+              The beauty of Dharmic wisdom lies in its practical applicability. Whether in the marketplace 
+              or the meditation hall, the principles remain the same: act with awareness, maintain equanimity, 
+              and remember the interconnectedness of all beings.
+            </p>
+          </div>
 
-          <p className={cn(
-            "text-lg",
-            settings.enabled ? "opacity-80" : "text-muted-foreground"
-          )}>
-            {post.excerpt}
-          </p>
-        </header>
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2 mt-8 pt-8 border-t border-border">
+            {post.tags.map((tag, i) => (
+              <span
+                key={i}
+                className={cn(
+                  "inline-flex items-center gap-1 px-3 py-1 text-sm rounded-full",
+                  settings.enabled 
+                    ? "bg-black/10 text-current" 
+                    : "bg-muted text-muted-foreground"
+                )}
+              >
+                <Tag className="w-3 h-3" />
+                {tag}
+              </span>
+            ))}
+          </div>
 
-        {/* Content */}
-        <div className={cn(
-          "prose prose-lg max-w-none",
-          settings.enabled ? "" : "dark:prose-invert"
-        )}>
-          <p>{post.content}</p>
-          
-          {/* Extended sample content for reading mode demo */}
-          <h2>The Nature of Dharmic Living</h2>
-          <p>
-            In the vast tapestry of Sanātana Dharma, each thread represents a unique path toward the ultimate truth. 
-            The sages of ancient Bhārata understood that the cosmic order, known as Ṛta, permeates all aspects of existence—
-            from the grand movements of celestial bodies to the subtle stirrings of the human heart.
-          </p>
-          <p>
-            When we align our actions with this divine order, we experience what the Upaniṣads call "śānti"—
-            a profound peace that transcends the fluctuations of worldly circumstances. This is not mere 
-            passivity but a dynamic harmony, like the stillness at the center of a spinning wheel.
-          </p>
-          
-          <blockquote>
-            धर्मो रक्षति रक्षितः — Dharma protects those who protect Dharma.
-          </blockquote>
-          
-          <h2>Practical Applications</h2>
-          <p>
-            The beauty of Dharmic wisdom lies in its practical applicability. Whether in the marketplace 
-            or the meditation hall, the principles remain the same: act with awareness, maintain equanimity, 
-            and remember the interconnectedness of all beings.
-          </p>
-        </div>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-2 mt-8 pt-8 border-t border-border">
-          {post.tags.map((tag, i) => (
-            <span
-              key={i}
-              className={cn(
-                "inline-flex items-center gap-1 px-3 py-1 text-sm rounded-full",
-                settings.enabled 
-                  ? "bg-black/10 text-current" 
-                  : "bg-muted text-muted-foreground"
-              )}
-            >
-              <Tag className="w-3 h-3" />
-              {tag}
-            </span>
-          ))}
-        </div>
-      </article>
-    </ReadingModeWrapper>
+          {/* Share at bottom */}
+          <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">Share this article</p>
+            <ShareButtons 
+              title={post.title} 
+              excerpt={post.excerpt} 
+              url={postUrl} 
+            />
+          </div>
+        </article>
+      </ReadingModeWrapper>
+    </>
   );
 };
 
