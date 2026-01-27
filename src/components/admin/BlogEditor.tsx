@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { ArrowLeft, Save, Eye, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-
+import RichTextEditor from "./RichTextEditor";
 interface BlogEditorProps {
   postId: string | null;
   onBack: () => void;
@@ -251,14 +250,11 @@ const BlogEditor = ({ postId, onBack }: BlogEditorProps) => {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="content">Content (Markdown supported)</Label>
-                <Textarea
-                  id="content"
-                  value={formData.content}
-                  onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+                <Label>Content</Label>
+                <RichTextEditor
+                  content={formData.content}
+                  onChange={(content) => setFormData(prev => ({ ...prev, content }))}
                   placeholder="Write your post content here..."
-                  rows={20}
-                  className="font-mono text-sm"
                 />
               </div>
             </CardContent>
