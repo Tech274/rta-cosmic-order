@@ -18,6 +18,7 @@ import { Slider } from "@/components/ui/slider";
 import { useAudioPlayer } from "@/contexts/AudioPlayerContext";
 import SleepTimer from "./SleepTimer";
 import BookmarksPanel from "./BookmarksPanel";
+import PlaybackSpeedControl from "./PlaybackSpeedControl";
 
 const FullPlayer = () => {
   const {
@@ -79,12 +80,6 @@ const FullPlayer = () => {
     setVolume(value[0]);
   };
 
-  const changePlaybackRate = () => {
-    const rates = [0.5, 0.75, 1, 1.25, 1.5, 2];
-    const currentIndex = rates.indexOf(playbackRate);
-    const nextRate = rates[(currentIndex + 1) % rates.length];
-    setPlaybackRate(nextRate);
-  };
 
   const formatTime = (seconds: number) => {
     const hrs = Math.floor(seconds / 3600);
@@ -227,15 +222,11 @@ const FullPlayer = () => {
 
           {/* Controls */}
           <div className="flex items-center justify-center gap-4">
-            {/* Playback Speed */}
-            <Button 
-              variant="ghost" 
-              size="sm"
-              onClick={changePlaybackRate}
-              className="text-xs min-w-[60px]"
-            >
-              {playbackRate}x
-            </Button>
+            {/* Playback Speed - Enhanced */}
+            <PlaybackSpeedControl
+              currentRate={playbackRate}
+              onRateChange={setPlaybackRate}
+            />
 
             {/* Skip Back */}
             <Button variant="ghost" size="icon" onClick={() => skip(-15)}>
