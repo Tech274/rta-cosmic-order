@@ -12,12 +12,14 @@ import TempleDetail from "./pages/TempleDetail";
 import Scriptures from "./pages/Scriptures";
 import ScriptureDetail from "./pages/ScriptureDetail";
 import ChapterDetail from "./pages/ChapterDetail";
+import TantraDetail from "./pages/TantraDetail";
 import Sadhana from "./pages/Sadhana";
 import DailyDharma from "./pages/DailyDharma";
 import DharmaPath from "./pages/DharmaPath";
 import Profile from "./pages/Profile";
 import Meditation from "./pages/Meditation";
 import Philosophy from "./pages/Philosophy";
+import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -38,6 +40,8 @@ const App = () => (
               <Route path="/scriptures" element={<Scriptures />} />
               <Route path="/scriptures/:id" element={<ScriptureDetail />} />
               <Route path="/scriptures/:scriptureId/chapters/:chapterId" element={<ChapterDetail />} />
+              <Route path="/scriptures/tantra/:categoryId" element={<TantraDetail />} />
+              <Route path="/scriptures/tantra/:categoryId/:articleId" element={<TantraDetail />} />
               <Route path="/sadhana" element={<Sadhana />} />
               <Route path="/daily-dharma" element={<DailyDharma />} />
               <Route path="/dharma-path" element={<DharmaPath />} />
@@ -45,6 +49,8 @@ const App = () => (
               <Route path="/meditation" element={<Meditation />} />
               <Route path="/philosophy" element={<Philosophy />} />
               <Route path="/philosophy/:articleId" element={<Philosophy />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<Blog />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>

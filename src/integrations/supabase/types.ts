@@ -56,6 +56,108 @@ export type Database = {
         }
         Relationships: []
       }
+      audiobooks: {
+        Row: {
+          audio_url: string | null
+          author: string
+          category: string
+          chapters: Json | null
+          cover_image: string | null
+          created_at: string
+          description: string | null
+          duration_seconds: number | null
+          id: string
+          narrator: string | null
+          sanskrit_title: string | null
+          status: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          audio_url?: string | null
+          author: string
+          category?: string
+          chapters?: Json | null
+          cover_image?: string | null
+          created_at?: string
+          description?: string | null
+          duration_seconds?: number | null
+          id?: string
+          narrator?: string | null
+          sanskrit_title?: string | null
+          status?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          audio_url?: string | null
+          author?: string
+          category?: string
+          chapters?: Json | null
+          cover_image?: string | null
+          created_at?: string
+          description?: string | null
+          duration_seconds?: number | null
+          id?: string
+          narrator?: string | null
+          sanskrit_title?: string | null
+          status?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      blog_posts: {
+        Row: {
+          author_id: string
+          category: string
+          content: string
+          created_at: string
+          excerpt: string | null
+          featured_image: string | null
+          id: string
+          published_at: string | null
+          slug: string
+          status: string
+          tags: string[] | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_id: string
+          category?: string
+          content: string
+          created_at?: string
+          excerpt?: string | null
+          featured_image?: string | null
+          id?: string
+          published_at?: string | null
+          slug: string
+          status?: string
+          tags?: string[] | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string
+          category?: string
+          content?: string
+          created_at?: string
+          excerpt?: string | null
+          featured_image?: string | null
+          id?: string
+          published_at?: string | null
+          slug?: string
+          status?: string
+          tags?: string[] | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       bookmarked_subhashitas: {
         Row: {
           created_at: string
@@ -74,6 +176,39 @@ export type Database = {
           id?: string
           subhashita_id?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      content_galleries: {
+        Row: {
+          content_id: string
+          content_type: string
+          created_at: string
+          description: string | null
+          id: string
+          images: Json
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          content_id: string
+          content_type: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: Json
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          content_id?: string
+          content_type?: string
+          created_at?: string
+          description?: string | null
+          id?: string
+          images?: Json
+          title?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -524,6 +659,27 @@ export type Database = {
           },
         ]
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -548,6 +704,13 @@ export type Database = {
           isSetofReturn: true
         }
       }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       increment_discussion_views: {
         Args: { p_discussion_id: string }
         Returns: undefined
@@ -562,6 +725,7 @@ export type Database = {
       }
     }
     Enums: {
+      app_role: "admin" | "moderator" | "user"
       hall_type: "tattva" | "dharma" | "samvada"
       membership_level:
         | "seeker"
@@ -698,6 +862,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      app_role: ["admin", "moderator", "user"],
       hall_type: ["tattva", "dharma", "samvada"],
       membership_level: [
         "seeker",
